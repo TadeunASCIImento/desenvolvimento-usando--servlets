@@ -1,6 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<c:url value="/api" var="linkApi" />
+<c:url value="/controller" var="linkController" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,7 +16,7 @@
 		<header>
 			<h1 class="titulo">Atualização de dados da Empresa</h1>
 		</header>
-		<form action="${linkApi}" method="POST">
+		<form action="${linkController}" method="POST">
 			<input type="hidden" name="acao" value="update" />
 			<div class="form-row">
 				<div class="form-group col-md-4">

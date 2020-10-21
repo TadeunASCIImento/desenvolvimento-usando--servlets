@@ -5,7 +5,7 @@
 <%@page import="br.com.tadeu.gerenciador.models.Empresa"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="/api" var="linkApi" />
+<c:url value="/controller" var="linkController" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,10 +37,10 @@
 						<td><fmt:formatDate value="${empresa.dataAbertura}"
 								pattern="dd/MM/yyyy" /></td>
 
-						<td><a href="${linkApi}?id=${empresa.id}&acao=delete"><img
+						<td><a href="${linkController}?id=${empresa.id}&acao=delete"><img
 								src="static/imagens/icones/icone-delete.png"></a></td>
 
-						<td><a href="${linkApi}?id=${empresa.id}&acao=edit"><img
+						<td><a href="${linkController}?id=${empresa.id}&acao=edit"><img
 								src="static/imagens/icones/icone-update.png"></a></td>
 					</tr>
 				</c:forEach>

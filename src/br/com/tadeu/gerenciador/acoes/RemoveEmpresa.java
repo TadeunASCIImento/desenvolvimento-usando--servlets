@@ -11,9 +11,9 @@ import br.com.tadeu.gerenciador.models.Banco;
 public class RemoveEmpresa {
 
 	public void executa(String paramId, HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
+
 		new Banco().remove(new BigInteger(paramId));
-		response.sendRedirect("api?acao=list");
+		response.sendRedirect("controller?acao=list");
 
 	}
 

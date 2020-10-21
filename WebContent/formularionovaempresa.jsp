@@ -1,5 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="/api" var="linkApi" />
+<c:url value="/controller" var="linkController" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,7 +15,7 @@
 		<header>
 			<h1 class="titulo">Cadastro de Empresas</h1>
 		</header>
-		<form action="${linkApi}" method="POST">
+		<form action="${linkController}" method="POST">
 			<input type="hidden" name="acao" value="create" />
 			<div class="form-row">
 				<div class="form-group col-md-3">
@@ -26,9 +26,10 @@
 					<label>Nome da empresa</label> <input type="text" name="nome"
 						class="form-control" value="${empresa.nome}" />
 				</div>
-				<div class="form-group col-md-4">
+				<div class="form-group col-md-3">
 					<label>Data de abertura</label> <input type="date"
-						name="dataAbertura" class="form-control" />
+						name="dataAbertura" class="form-control"
+						style="text-align: center;" />
 				</div>
 			</div>
 			<input type="submit" value="Cadastrar" class="btn btn-primary" />
