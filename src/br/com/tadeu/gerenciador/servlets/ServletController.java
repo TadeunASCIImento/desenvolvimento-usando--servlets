@@ -5,15 +5,16 @@ import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import br.com.tadeu.gerenciador.acoes.EditaEmpresa;
+import br.com.tadeu.gerenciador.acoes.ListaEmpresas;
+import br.com.tadeu.gerenciador.acoes.RemoveEmpresa;
 import br.com.tadeu.gerenciador.models.Banco;
 import br.com.tadeu.gerenciador.models.Empresa;
 
@@ -35,6 +36,7 @@ public class ServletController extends HttpServlet {
 
 		switch (paramAcao) {
 		case "create":
+
 			try {
 				SimpleDateFormat sdfc = new SimpleDateFormat("yyyy-MM-dd");
 				dataAbertura = sdfc.parse(paramData);
@@ -46,6 +48,7 @@ public class ServletController extends HttpServlet {
 			empresa.setDataAbertura(dataAbertura);
 			bd.adiciona(empresa);
 			response.sendRedirect("api?acao=list");
+
 			break;
 
 		case "update":
@@ -70,30 +73,19 @@ public class ServletController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		String paramAcao = request.getParameter("acao");
 		String paramId = request.getParameter("id");
-		Empresa empresa = new Empresa();
-
 		switch (paramAcao) {
 		case "edit":
-			BigInteger idEmpresa = new BigInteger(paramId);
-			empresa = new Banco().findOne(idEmpresa);
-			request.setAttribute("empresa", empresa);
-			RequestDispatcher rd1 = request.getRequestDispatcher("/formularioatualizacao.jsp");
-			rd1.forward(request, response);
+			new EditaEmpresa().executa(paramId, request, response);
 			break;
 
 		case "delete":
-			new Banco().remove(new BigInteger(paramId));
-			response.sendRedirect("api?acao=list");
+			new RemoveEmpresa().executa(paramId, request, response);
 			break;
 
 		case "list":
-			List<Empresa> empresas = new Banco().getEmpresas();
-			RequestDispatcher rd2 = request.getRequestDispatcher("/tabelaempresascadastradas.jsp");
-			request.setAttribute("empresas", empresas);
-			rd2.forward(request, response);
+			new ListaEmpresas().executa(request, response);
 			break;
 		}
 
