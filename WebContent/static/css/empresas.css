@@ -1,0 +1,19 @@
+@charset "ISO-8859-1";
+
+* {
+	font-family: monospace;
+}
+
+.titulo {
+	text-align: center;
+	color: gray;
+	margin: 20px 0px 40px 0px;
+}
+
+.container {
+	margin: 20px 0px 0px 0px;
+}
+
+table {
+	text-align: center;
+}
