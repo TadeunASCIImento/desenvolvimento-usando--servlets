@@ -13,7 +13,8 @@
 <body>
 	<div class="container">
 		<header>
-			<h1 class="titulo">Atualização de dados da Empresa</h1>
+			<h1 class="titulo">Alteração</h1>
+			<c:import url="templateLogout.html" />
 		</header>
 		<form action="${linkEmpresa}" method="POST">
 			<input type="hidden" name="acao" value="AlteraEmpresa" />

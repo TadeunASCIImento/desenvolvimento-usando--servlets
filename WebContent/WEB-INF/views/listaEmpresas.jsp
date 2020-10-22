@@ -17,9 +17,10 @@
 <body>
 	<div class="container">
 
-		Usuario Logado:${usuario.login}
+		Olá ${usuario.login} bem vindo ao cadastro de empresas.
 		<header>
-			<h1 class="titulo">Empresas Cadastradas</h1>
+			<c:import url="templateLogout.html" />
+			<h1 class="titulo">Empresas</h1>
 		</header>
 		<table class="table table-striped table-bordered">
 			<thead>

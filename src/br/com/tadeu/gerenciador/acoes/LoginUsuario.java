@@ -18,13 +18,18 @@ public class LoginUsuario implements Acao {
 
 		String login = request.getParameter("login");
 		String senha = request.getParameter("senha");
+
 		Usuario usuario = new Banco().findUsuario(login, senha);
 
+		HttpSession session = request.getSession();
+
+		String mensagem = null;
 		if (usuario != null) {
-			HttpSession session = request.getSession();
 			session.setAttribute("usuario", usuario);
 			return "redirect:empresa?acao=ListaEmpresas";
 		} else {
+			mensagem = "Usuário ou senha inválidos";
+			session.setAttribute("mensagem", mensagem);
 			return "redirect:empresa?acao=LoginUsuarioForm";
 		}
 
