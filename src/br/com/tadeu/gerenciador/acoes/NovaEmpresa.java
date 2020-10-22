@@ -14,10 +14,13 @@ import br.com.tadeu.gerenciador.models.Empresa;
 
 public class NovaEmpresa {
 
-	public void executa(String paramData, String paramNome, String paramId, HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
+		String paramId = request.getParameter("id");
+		String paramNome = request.getParameter("nome");
+		String paramData = request.getParameter("dataAbertura");
 		Date dataAbertura = null;
+
 		try {
 			SimpleDateFormat sdfc = new SimpleDateFormat("yyyy-MM-dd");
 			dataAbertura = sdfc.parse(paramData);
@@ -31,7 +34,7 @@ public class NovaEmpresa {
 		empresa.setDataAbertura(dataAbertura);
 		new Banco().adiciona(empresa);
 
-		response.sendRedirect("controller?acao=list");
+		return "redirect:controller?acao=list";
 
 	}
 

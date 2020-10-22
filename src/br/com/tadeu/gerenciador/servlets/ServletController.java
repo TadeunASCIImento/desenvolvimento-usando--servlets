@@ -2,6 +2,7 @@ package br.com.tadeu.gerenciador.servlets;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,20 +23,24 @@ public class ServletController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		String paramAcao = request.getParameter("acao");
-		String paramId = request.getParameter("id");
-		String paramNome = request.getParameter("nome");
-		String paramData = request.getParameter("dataAbertura");
-
+		String endereco = null;
 		switch (paramAcao) {
 		case "create":
-			new NovaEmpresa().executa(paramData, paramNome, paramId, request, response);
+			endereco = new NovaEmpresa().executa(request, response);
 			break;
 
 		case "update":
-			new AlteraEmpresa().executa(paramData, paramId, paramNome, request, response);
+			endereco = new AlteraEmpresa().executa(request, response);
 			break;
+		}
+
+		String[] url = endereco.split(":");
+		if (url[0].equals("forward")) {
+			RequestDispatcher rd2 = request.getRequestDispatcher(url[1]);
+			rd2.forward(request, response);
+		} else if (url[0].equals("redirect")) {
+			response.sendRedirect(url[1]);
 		}
 
 	}
@@ -44,22 +49,28 @@ public class ServletController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		String paramAcao = request.getParameter("acao");
-		String paramId = request.getParameter("id");
-
+		String endereco = null;
 		switch (paramAcao) {
 		case "edit":
-			new EditaEmpresa().executa(paramId, request, response);
+			endereco = new EditaEmpresa().executa(request, response);
 			break;
 
 		case "delete":
-			new RemoveEmpresa().executa(paramId, request, response);
+			endereco = new RemoveEmpresa().executa(request, response);
 			break;
 
 		case "list":
-			new ListaEmpresas().executa(request, response);
+			endereco = new ListaEmpresas().executa(request, response);
 			break;
+		}
+
+		String[] url = endereco.split(":");
+		if (url[0].equals("forward")) {
+			RequestDispatcher rd2 = request.getRequestDispatcher(url[1]);
+			rd2.forward(request, response);
+		} else if (url[0].equals("redirect")) {
+			response.sendRedirect(url[1]);
 		}
 
 	}

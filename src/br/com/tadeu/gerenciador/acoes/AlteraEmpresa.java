@@ -14,12 +14,15 @@ import br.com.tadeu.gerenciador.models.Empresa;
 
 public class AlteraEmpresa {
 
-	public void executa(String paramData, String paramId, String paramNome, HttpServletRequest request,
-			HttpServletResponse response) throws IOException {
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-		SimpleDateFormat sdfu = new SimpleDateFormat("yyyy/MM/dd");
+		String paramId = request.getParameter("id");
+		String paramNome = request.getParameter("nome");
+		String paramData = request.getParameter("dataAbertura");
+
 		Date dataAbertura = null;
 		try {
+			SimpleDateFormat sdfu = new SimpleDateFormat("yyyy/MM/dd");
 			dataAbertura = sdfu.parse(paramData);
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -27,11 +30,12 @@ public class AlteraEmpresa {
 
 		BigInteger idEmpresa = new BigInteger(paramId);
 		Empresa empresa = new Banco().findOne(idEmpresa);
+
 		empresa.setId(idEmpresa);
 		empresa.setNome(paramNome);
 		empresa.setDataAbertura(dataAbertura);
 
-		response.sendRedirect("controller?acao=list");
+		return "redirect:controller?acao=list";
 
 	}
 
