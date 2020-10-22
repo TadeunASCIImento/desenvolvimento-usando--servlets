@@ -15,6 +15,8 @@ public class MonitoramentoFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
+		System.out.println("MonitoramentoFilter");
+
 		String acao = request.getParameter("acao");
 
 		Long antes = System.currentTimeMillis();

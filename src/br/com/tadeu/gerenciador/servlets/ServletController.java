@@ -8,7 +8,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import br.com.tadeu.gerenciador.acoes.Acao;
 
@@ -21,15 +20,6 @@ public class ServletController extends HttpServlet {
 			throws ServletException, IOException {
 
 		String paramAcao = request.getParameter("acao");
-
-		HttpSession session = request.getSession();
-		boolean usuarioInvalido = (session.getAttribute("usuario") == null);
-		boolean ehProtegida = !(paramAcao.equals("LoginUsuario") || paramAcao.equals("LoginUsuarioForm"));
-		if (usuarioInvalido && ehProtegida) {
-			response.sendRedirect("empresa?acao=LoginUsuarioForm");
-			return;
-		}
-
 		String nome = "br.com.tadeu.gerenciador.acoes." + paramAcao;// nome da classe.
 		Class<?> classe;
 		Object object = null;
