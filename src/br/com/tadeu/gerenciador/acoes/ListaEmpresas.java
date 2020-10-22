@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import br.com.tadeu.gerenciador.models.Banco;
 import br.com.tadeu.gerenciador.models.Empresa;
 
-public class ListaEmpresas {
+public class ListaEmpresas implements Acao {
 
 	public String executa(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

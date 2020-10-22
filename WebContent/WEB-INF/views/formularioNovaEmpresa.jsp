@@ -1,5 +1,5 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<c:url value="/controller" var="linkController" />
+<c:url value="/empresa" var="linkEmpresa" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,8 +15,8 @@
 		<header>
 			<h1 class="titulo">Cadastro de Empresas</h1>
 		</header>
-		<form action="${linkController}" method="POST">
-			<input type="hidden" name="acao" value="create" />
+		<form action="${linkEmpresa}" method="POST">
+			<input type="hidden" name="acao" value="NovaEmpresa" />
 			<div class="form-row">
 				<div class="form-group col-md-3">
 					<label>CNPJ da empresa</label> <input type="text" name="id"

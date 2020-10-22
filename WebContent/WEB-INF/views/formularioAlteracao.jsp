@@ -1,6 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<c:url value="/controller" var="linkController" />
+<c:url value="/empresa" var="linkEmpresa" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -16,13 +16,12 @@
 		<header>
 			<h1 class="titulo">Atualização de dados da Empresa</h1>
 		</header>
-		<form action="${linkController}" method="POST">
-			<input type="hidden" name="acao" value="update" />
+		<form action="${linkEmpresa}" method="POST">
+			<input type="hidden" name="acao" value="AlteraEmpresa" />
 			<div class="form-row">
 				<div class="form-group col-md-4">
-					<input type="hidden" name="acao" value="alterar" /> <label>CNPJ
-						da empresa</label> ${empresa.id} <input type="hidden" name="id"
-						class="form-control" value="${empresa.id}" />
+					<label>CNPJ da empresa</label> ${empresa.id} <input type="hidden"
+						name="id" class="form-control" value="${empresa.id}" />
 				</div>
 				<div class="form-group col-md-4">
 					<label>Nome da empresa</label> <input type="text" name="nome"

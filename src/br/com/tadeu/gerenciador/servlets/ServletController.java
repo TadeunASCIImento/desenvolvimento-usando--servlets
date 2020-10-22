@@ -9,14 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.tadeu.gerenciador.acoes.AlteraEmpresa;
-import br.com.tadeu.gerenciador.acoes.EditaEmpresa;
-import br.com.tadeu.gerenciador.acoes.ListaEmpresas;
-import br.com.tadeu.gerenciador.acoes.NovaEmpresa;
-import br.com.tadeu.gerenciador.acoes.NovaEmpresaForm;
-import br.com.tadeu.gerenciador.acoes.RemoveEmpresa;
+import br.com.tadeu.gerenciador.acoes.Acao;
 
-@WebServlet("/controller")
+@WebServlet("/empresa")
 public class ServletController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -24,16 +19,19 @@ public class ServletController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String paramAcao = request.getParameter("acao");
-		String endereco = null;
-		switch (paramAcao) {
-		case "create":
-			endereco = new NovaEmpresa().executa(request, response);
-			break;
 
-		case "update":
-			endereco = new AlteraEmpresa().executa(request, response);
-			break;
+		String paramAcao = request.getParameter("acao");
+		String nome = "br.com.tadeu.gerenciador.acoes." + paramAcao;// nome da classe.
+		Class<?> classe;
+		Object object = null;
+		String endereco = null;
+
+		try {
+			classe = Class.forName(nome);
+			object = classe.newInstance();
+			endereco = ((Acao) object).executa(request, response);
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			throw new ServletException(e);
 		}
 
 		String[] url = endereco.split(":");
@@ -50,24 +48,19 @@ public class ServletController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		String paramAcao = request.getParameter("acao");
+		String nome = "br.com.tadeu.gerenciador.acoes." + paramAcao;// nome da classe.
+		Class<?> classe = null;
+		Object object = null;
 		String endereco = null;
-		switch (paramAcao) {
-		case "edit":
-			endereco = new EditaEmpresa().executa(request, response);
-			break;
 
-		case "delete":
-			endereco = new RemoveEmpresa().executa(request, response);
-			break;
-
-		case "list":
-			endereco = new ListaEmpresas().executa(request, response);
-			break;
-
-		case "NovaEmpresaForm":
-			endereco = new NovaEmpresaForm().executa(request, response);
-			break;
+		try {
+			classe = Class.forName(nome);
+			object = classe.newInstance();
+			endereco = ((Acao) object).executa(request, response);
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
+			throw new ServletException(e);
 		}
 
 		String[] url = endereco.split(":");

@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import br.com.tadeu.gerenciador.models.Banco;
 
-public class RemoveEmpresa {
+public class RemoveEmpresa implements Acao {
 
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -16,7 +16,7 @@ public class RemoveEmpresa {
 
 		new Banco().remove(new BigInteger(paramId));
 
-		return "redirect:controller?acao=list";
+		return "redirect:empresa?acao=ListaEmpresas";
 
 	}
 
