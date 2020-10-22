@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import br.com.tadeu.gerenciador.acoes.Acao;
 
@@ -15,43 +16,22 @@ import br.com.tadeu.gerenciador.acoes.Acao;
 public class ServletController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	// POST
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+	protected void service(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
 		String paramAcao = request.getParameter("acao");
+
+		HttpSession session = request.getSession();
+		boolean usuarioInvalido = (session.getAttribute("usuario") == null);
+		boolean ehProtegida = !(paramAcao.equals("LoginUsuario") || paramAcao.equals("LoginUsuarioForm"));
+		if (usuarioInvalido && ehProtegida) {
+			response.sendRedirect("empresa?acao=LoginUsuarioForm");
+			return;
+		}
+
 		String nome = "br.com.tadeu.gerenciador.acoes." + paramAcao;// nome da classe.
 		Class<?> classe;
-		Object object = null;
-		String endereco = null;
-
-		try {
-			classe = Class.forName(nome);
-			object = classe.newInstance();
-			endereco = ((Acao) object).executa(request, response);
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException e) {
-			throw new ServletException(e);
-		}
-
-		String[] url = endereco.split(":");
-		if (url[0].equals("forward")) {
-			RequestDispatcher rd2 = request.getRequestDispatcher("WEB-INF/views/" + url[1]);
-			rd2.forward(request, response);
-		} else if (url[0].equals("redirect")) {
-			response.sendRedirect(url[1]);
-		}
-
-	}
-
-	// GET
-	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-		String paramAcao = request.getParameter("acao");
-		String nome = "br.com.tadeu.gerenciador.acoes." + paramAcao;// nome da classe.
-		Class<?> classe = null;
 		Object object = null;
 		String endereco = null;
 

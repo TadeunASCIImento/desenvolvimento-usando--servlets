@@ -16,6 +16,8 @@
 </head>
 <body>
 	<div class="container">
+
+		Usuario Logado:${usuario.login}
 		<header>
 			<h1 class="titulo">Empresas Cadastradas</h1>
 		</header>

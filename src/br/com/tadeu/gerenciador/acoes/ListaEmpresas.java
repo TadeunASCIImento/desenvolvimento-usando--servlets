@@ -16,6 +16,7 @@ public class ListaEmpresas implements Acao {
 			throws ServletException, IOException {
 
 		List<Empresa> empresas = new Banco().getEmpresas();
+		
 		request.setAttribute("empresas", empresas);
 
 		return "forward:listaEmpresas.jsp";
