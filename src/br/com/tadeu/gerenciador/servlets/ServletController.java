@@ -13,6 +13,7 @@ import br.com.tadeu.gerenciador.acoes.AlteraEmpresa;
 import br.com.tadeu.gerenciador.acoes.EditaEmpresa;
 import br.com.tadeu.gerenciador.acoes.ListaEmpresas;
 import br.com.tadeu.gerenciador.acoes.NovaEmpresa;
+import br.com.tadeu.gerenciador.acoes.NovaEmpresaForm;
 import br.com.tadeu.gerenciador.acoes.RemoveEmpresa;
 
 @WebServlet("/controller")
@@ -37,7 +38,7 @@ public class ServletController extends HttpServlet {
 
 		String[] url = endereco.split(":");
 		if (url[0].equals("forward")) {
-			RequestDispatcher rd2 = request.getRequestDispatcher(url[1]);
+			RequestDispatcher rd2 = request.getRequestDispatcher("WEB-INF/views/" + url[1]);
 			rd2.forward(request, response);
 		} else if (url[0].equals("redirect")) {
 			response.sendRedirect(url[1]);
@@ -63,11 +64,15 @@ public class ServletController extends HttpServlet {
 		case "list":
 			endereco = new ListaEmpresas().executa(request, response);
 			break;
+
+		case "NovaEmpresaForm":
+			endereco = new NovaEmpresaForm().executa(request, response);
+			break;
 		}
 
 		String[] url = endereco.split(":");
 		if (url[0].equals("forward")) {
-			RequestDispatcher rd2 = request.getRequestDispatcher(url[1]);
+			RequestDispatcher rd2 = request.getRequestDispatcher("WEB-INF/views/" + url[1]);
 			rd2.forward(request, response);
 		} else if (url[0].equals("redirect")) {
 			response.sendRedirect(url[1]);
