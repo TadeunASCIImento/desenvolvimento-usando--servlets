@@ -1,26 +1,31 @@
-package br.com.tadeu.gerenciador.servlets;
+package br.com.tadeu.gerenciador.filters;
 
 import java.io.IOException;
 
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import br.com.tadeu.gerenciador.acoes.Acao;
 
-@WebServlet("/empresa")
-public class ServletController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+public class ControladorFilter implements Filter {
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain chain)
+			throws IOException, ServletException {
+
+		System.out.println("ControladorFilter");
+
+		HttpServletRequest request = (HttpServletRequest) servletRequest;
+		HttpServletResponse response = (HttpServletResponse) servletResponse;
 
 		String paramAcao = request.getParameter("acao");
-		String nome = "br.com.tadeu.gerenciador.acoes." + paramAcao;// nome da classe.
+		String nome = "br.com.tadeu.gerenciador.acoes." + paramAcao;
 		Class<?> classe;
 		Object object = null;
 		String endereco = null;

@@ -12,9 +12,10 @@
 </head>
 <body>
 	<div class="container">
+		Olá ${usuario.login} bem vindo ao cadastro de empresas.
 		<header>
-			<h1 class="titulo">Alteração</h1>
 			<c:import url="templateLogout.html" />
+			<h1 class="titulo">Alteração</h1>
 		</header>
 		<form action="${linkEmpresa}" method="POST">
 			<input type="hidden" name="acao" value="AlteraEmpresa" />
