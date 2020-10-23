@@ -16,7 +16,7 @@
 
 	<filter>
 		<filter-name>MF</filter-name>
-		<filter-class>br.com.tadeu.gerenciador.filters.MonitoramentoFilter</filter-class>
+		<filter-class>br.com.tadeu.gerenciador.servlets.MonitoramentoFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
@@ -26,7 +26,7 @@
 
 	<filter>
 		<filter-name>AF</filter-name>
-		<filter-class>br.com.tadeu.gerenciador.filters.AutorizacaoFilter</filter-class>
+		<filter-class>br.com.tadeu.gerenciador.servlets.AutorizacaoFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
@@ -36,7 +36,7 @@
 
 	<filter>
 		<filter-name>CF</filter-name>
-		<filter-class>br.com.tadeu.gerenciador.filters.ControladorFilter</filter-class>
+		<filter-class>br.com.tadeu.gerenciador.servlets.ControladorFilter</filter-class>
 	</filter>
 
 	<filter-mapping>
